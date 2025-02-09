@@ -1,5 +1,7 @@
 ---
-import NavBar from '../components/react/NavBar';
+//import NavBar from '../components/react/NavBar';
+import NavBar from '../components/NavBar.astro';
+import NavBarAlpine from '../components/NavBarAlpine.astro';
 import Estrellas from '../components/Estrellas.astro';
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
@@ -12,7 +14,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<Estrellas></Estrellas>
-	<NavBar client:only="react"/>
+	<NavBarAlpine/>
 	<section class=" pt-12 overflow-hidden bg-black sm:pt-16">
         <div class=" px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div class="max-w-4xl mx-auto text-center">
