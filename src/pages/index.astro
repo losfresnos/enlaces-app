@@ -1,6 +1,6 @@
 ---
 import NavBar from '../components/react/NavBar';
-import Starts from '../components/Starts.astro';
+import Estrellas from '../components/Estrellas.astro';
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
@@ -12,7 +12,7 @@ export const prerender = false
 ---
 
 <Layout>
-	<Starts client:idle={{timeout: 500}}></Starts>
+	<Estrellas></Estrellas>
 	<NavBar client:only="react"/>
 	<section class=" pt-12 overflow-hidden bg-black sm:pt-16">
         <div class=" px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
