@@ -21,7 +21,7 @@ export const NavBar = () => {
                         </svg>
                     </div>
                     <div>
-                    <a href="javascript:void(0)">
+                    <a href="https://enlaces-app.pages.dev/">
                             <h2 className="text-3xl font-bold text-white ml-2">LINKS</h2>
                         </a>  
                     </div>
