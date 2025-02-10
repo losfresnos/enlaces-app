@@ -8,7 +8,9 @@ import alpinejs from '@astrojs/alpinejs';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), alpinejs()],
+  integrations: [react({
+    include: ["**/react/**/*.{jsx,tsx}"],
+  }), alpinejs()],
   output:"server",
   adapter: cloudflare(),
   vite: {

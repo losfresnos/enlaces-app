@@ -2,6 +2,7 @@
 //import NavBar from '../components/react/NavBar';
 import NavBar from '../components/NavBar.astro';
 import NavBarAlpine from '../components/NavBarAlpine.astro';
+import NavBarReact from '../components/react/NavBarReact';
 import Estrellas from '../components/Estrellas.astro';
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
@@ -14,6 +15,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<Estrellas></Estrellas>
+    <NavBarReact client:load></NavBarReact>
 	<NavBarAlpine/>
 	<section class=" pt-12 overflow-hidden bg-black sm:pt-16">
         <div class=" px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
