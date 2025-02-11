@@ -22,7 +22,7 @@ export const NavBar = () => {
                     </div>
                     <div>
                     <a href="https://enlaces-app.pages.dev/">
-                            <h2 className="text-3xl font-bold text-white ml-2">LINKS</h2>
+                            <h2 className="text-3xl font-bold text-transparent bg-clip-text ml-2 bg-gradient-to-r from-cyan-500 to-purple-500">LINKS & DOCS</h2>
                         </a>  
                     </div>
                 </div>               
@@ -71,17 +71,17 @@ export const NavBar = () => {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Home</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
+                                <a href="/">Home</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Blog</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
+                                <a href="/links">Links</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">About US</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
+                                <a href="/docs">Docs</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Contact US</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
+                                <a href="/contact">Contact US</a>
                             </li>
                         </ul>                       
                     </div>

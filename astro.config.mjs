@@ -6,11 +6,13 @@ import cloudflare from '@astrojs/cloudflare';
 
 import alpinejs from '@astrojs/alpinejs';
 
+import icon from 'astro-icon';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react({
     include: ["**/react/**/*.{jsx,tsx}"],
-  }), alpinejs()],
+  }), alpinejs(), icon()],
   output:"server",
   adapter: cloudflare(),
   vite: {
