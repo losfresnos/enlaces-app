@@ -1,7 +1,10 @@
 ---
 import '../../styles/global.css';
 import Layout from "../../layouts/Layout.astro";
+import BaseTable from "../../components/tabla/BaseTable.astro";
 import { getCollection } from "astro:content";
+import Titulo from "../../components/tabla/Titulo.astro";
+import Card from "../../components/card/Card.astro"
 
 export const prerender = true
 
@@ -16,144 +19,35 @@ export async function getStaticPaths() {
 }
 
 const { link } = Astro.props;
-
-console.log("Enlace:"+link.data.id);
 ---
 <Layout>
-	
-    <h1 class="text-xl font-bold text-white">Categoria enlace - { link.data.id }</h1>    
-	{link.data.links.map((link) => 
-		<h1 class="text-xl font-bold text-white">{link.name}</h1>
-		<h1 class="text-xl font-bold text-white">{link.url}</h1>
-		)}
-	<div class="py-12 bg-black sm:py-16 lg:py-20">
-		<div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-			<div class="flex items-center justify-between">
-				<p class="text-xl font-bold text-gray-900">Sales</p>				
+	<section id="frameworks" class="py-20 bg-inherit">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+				{link.data.description}
+			</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+				{link.data.links.map((link) => 
+					<Card 
+						href={`${link.url}`}
+						target={link.target}
+						isIcon={false}
+						title={link.name}
+						titleSize="sg"
+						subtitle="Select to open"></Card>
+				)}
 			</div>
-	
-			<div class="flex flex-col mt-4 lg:mt-8">
-				<div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-					<div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-						<table class="min-w-full lg:divide-y lg:divide-gray-200">
-							<thead class="hidden lg:table-header-group">
-								<tr>
-									<th class="py-3.5 pl-4 pr-3 text-left text-sm whitespace-nowrap font-medium text-gray-500 sm:pl-6 md:pl-0">
-										<div class="flex items-center">
-											ID
-											<svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-											</svg>
-										</div>
-									</th>
-	
-									<th class="py-3.5 px-3 text-left text-sm whitespace-nowrap font-medium text-gray-500">
-										<div class="flex items-center">
-											Product
-											<svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-											</svg>
-										</div>
-									</th>
-	
-									<th class="py-3.5 px-3 text-left text-sm whitespace-nowrap font-medium text-gray-500">
-										<div class="flex items-center">
-											Customer Name
-											<svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-											</svg>
-										</div>
-									</th>
-	
-									<th class="py-3.5 px-3 text-left text-sm whitespace-nowrap font-medium text-gray-500">
-										<div class="flex items-center">
-											Date
-											<svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-											</svg>
-										</div>
-									</th>
-	
-									<th class="py-3.5 px-3 text-left text-sm whitespace-nowrap font-medium text-gray-500">
-										<div class="flex items-center">
-											Price
-											<svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-											</svg>
-										</div>
-									</th>
-	
-									<th class="py-3.5 px-3 text-left text-sm whitespace-nowrap font-medium text-gray-500">
-										<div class="flex items-center">
-											Status
-											<svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-											</svg>
-										</div>
-									</th>
-	
-									<th class="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">
-										<span class="sr-only"> Actions </span>
-									</th>
-								</tr>
-							</thead>
-	
-							<tbody class="divide-y divide-gray-200">
-								<tr>
-									<td class="hidden py-4 pl-4 pr-3 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap sm:pl-6 md:pl-0">#29345</td>
-	
-									<td class="px-4 py-4 text-sm font-bold text-gray-900 whitespace-nowrap">
-										<div class="inline-flex items-center">
-											<img class="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-landing-logo.png" alt="" />
-											Clarity Landing UI Kit
-										</div>
-										<div class="space-y-1 lg:hidden pl-11">
-											<p class="text-sm font-medium text-gray-500">#29345</p>
-											<p class="text-sm font-medium text-gray-500">07 January, 2022</p>
-										</div>
-									</td>
-	
-									<td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">James Dorgan</td>
-	
-									<td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">07 January, 2022</td>
-	
-									<td class="hidden px-4 py-4 text-sm font-bold text-gray-900 lg:table-cell whitespace-nowrap">$59.00</td>
-	
-									<td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-										<div class="inline-flex items-center">
-											<svg class="mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
-												<circle cx="4" cy="4" r="3" />
-											</svg>
-											Complete
-										</div>
-									</td>
-	
-									<td class="px-4 py-4 text-sm font-medium text-right text-gray-900 whitespace-nowrap">
-										<button type="button" class="inline-flex items-center justify-center w-8 h-8 text-gray-400 transition-all duration-200 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-											<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-												<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
-											</svg>
-										</button>
-										<div class="mt-1 lg:hidden">
-											<p>$59.00</p>
-											<div class="inline-flex items-center justify-end mt-1">
-												<svg class="mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
-													<circle cx="4" cy="4" r="3" />
-												</svg>
-												Complete
-											</div>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+			<button onclick="history.back()" type="button" class="mt-4 text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+				<svg class="mr-5" fill="currentcolor" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 				viewBox="0 0 26.676 26.676" xml:space="preserve">
+					<g>
+					<path d="M26.105,21.891c-0.229,0-0.439-0.131-0.529-0.346l0,0c-0.066-0.156-1.716-3.857-7.885-4.59
+						c-1.285-0.156-2.824-0.236-4.693-0.25v4.613c0,0.213-0.115,0.406-0.304,0.508c-0.188,0.098-0.413,0.084-0.588-0.033L0.254,13.815
+						C0.094,13.708,0,13.528,0,13.339c0-0.191,0.094-0.365,0.254-0.477l11.857-7.979c0.175-0.121,0.398-0.129,0.588-0.029
+						c0.19,0.102,0.303,0.295,0.303,0.502v4.293c2.578,0.336,13.674,2.33,13.674,11.674c0,0.271-0.191,0.508-0.459,0.562
+						C26.18,21.891,26.141,21.891,26.105,21.891z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></svg>
+				Prev Page
+			</button>
 		</div>
-	</div>
-	
-
-
-
+	</section>	
 </Layout>

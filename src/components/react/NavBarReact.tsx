@@ -71,18 +71,27 @@ export const NavBar = () => {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
-                                <a href="/">Home</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-0.5">
+                                <a className="p-2 group" href="/">Home
+                                <div className="bg-purple-500 h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                                </a>
                             </li>
-                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
-                                <a href="/categorias">Links</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-0.5">
+                                <a className="p-2 group" href="/categorias">Links
+                                <div className="bg-purple-500 h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                                </a>
                             </li>
-                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
-                                <a href="/docs">Docs</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-0.5">
+                                <a className="p-2 group" href="/docs">Docs
+                                <div className="bg-purple-500 h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>                               
+                                </a>
                             </li>
-                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
-                                <a href="/contact">Contact US</a>
+                            <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-0.5">
+                                <a className="p-2 group" href="/contact">Contact US
+                                    <div className="bg-purple-500 h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                                </a>
                             </li>
+                           
                         </ul>                       
                     </div>
                 </div>
