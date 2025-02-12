@@ -75,7 +75,7 @@ export const NavBar = () => {
                                 <a href="/">Home</a>
                             </li>
                             <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
-                                <a href="/links">Links</a>
+                                <a href="/categorias">Links</a>
                             </li>
                             <li className="text-xl text-white hover:text-purple-500 hover:-translate-y-1">
                                 <a href="/docs">Docs</a>
