@@ -1,30 +1,24 @@
 [
 	{
 		"id": "platform",
-		"description": "Platform BBVA",		
+		"description": "Platform",		
 		"links": [
-            { "name": "Ether platform", "url": "https://platform.bbva.com/" ,"target": "_blank" },
-            { "name": "Ether console aap", "url": "https://console.platform.bbva.com/app/" ,"target": "_blank" },
-            { "name": "Ether platform", "url": "https://platform.bbva.com/","target": "_blank"  },
-            { "name": "Cells catalog", "url": "https://catalogs.platform.bbva.com/cells/" ,"target": "_blank" },
-            { "name": "Web components catalog", "url": "https://au-bbva-andromeda.appspot.com/api/projects/au-bbva-cells-platform/segments/au-bbva-cells-artefacts/resources/cells/apps/bbva_gl_catalog/cells-catalog/master/cellsapp/pr/vulcanize/index.html#!/" ,"target": "_blank" },
-            { "name": "Ether console aap", "url": "https://console.platform.bbva.com/app/" ,"target": "_blank" },
-            { "name": "Ether platform", "url": "https://platform.bbva.com/","target": "_blank" },
-            { "name": "Ether console aap", "url": "https://console.platform.bbva.com/app/" ,"target": "_blank" },
-            { "name": "Ether platform", "url": "https://platform.bbva.com/","target": "_blank"  },
-            { "name": "Cells catalog", "url": "https://catalogs.platform.bbva.com/cells/" ,"target": "_blank" },
-            { "name": "Web components catalog", "url": "https://au-bbva-andromeda.appspot.com/api/projects/au-bbva-cells-platform/segments/au-bbva-cells-artefacts/resources/cells/apps/bbva_gl_catalog/cells-catalog/master/cellsapp/pr/vulcanize/index.html#!/","target": "_blank"  },
-            { "name": "Ether console aap", "url": "https://console.platform.bbva.com/app/","target": "_blank" }
+            { "name": "Ether platform", "url": "http://marca.com/" ,"target": "_blank" },
+            { "name": "Ether console aap", "url": "http://as.com" ,"target": "_blank" },
+            { "name": "Ether platform", "url": "http://bbva.com/","target": "_blank"  },
+            { "name": "Cells catalog", "url": "http://astro.build//" ,"target": "_blank" },
+            { "name": "Web components catalog", "url": "https://astro.build/integrations/" ,"target": "_blank" },
+           
         ]
 	},
     {
 		"id": "athenea",
 		"description": "Athenea monitoring",		
 		"links": [
-            { "name": "Work-01", "url": "https://atenea.work-01.nextgen.igrupobbva" ,"target": "_blank" },
-            { "name": "Work-02", "url": "https://atenea.work-02.nextgen.igrupobbva","target": "_blank"  },
-            { "name": "Live-01", "url": "https://atenea.live-01.nextgen.igrupobbva" ,"target": "_blank" },
-            { "name": "Live-02", "url": "https://atenea.live-02.nextgen.igrupobbva" ,"target": "_blank" }
+            { "name": "Work-01", "url": "https://docs.astro.build/en/getting-started/" ,"target": "_blank" },
+            { "name": "Work-02", "url": "https://astro.build/blog/","target": "_blank"  },
+            { "name": "Live-01", "url": "https://astro.build/showcase/" ,"target": "_blank" },
+            { "name": "Live-02", "url": "https://astro.build/themes/" ,"target": "_blank" }
         ]
 	}
 ]
