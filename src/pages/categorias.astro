@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import  NewCard from '../components/card/Card.astro';
+import type {CardPropsDto, Category}  from '../model/AppModel'
+import logger from '../configuration/logger';
+import { getCategories} from '../data/tursoConnector'
+import { home } from '../data/site';
+
+// Helper function to capitalize first letter
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+let cards: CardPropsDto[] = [];
+const categories: Category[] = await getCategories();
+logger.info("Categorias.astro categories:"+JSON.stringify(categories));
+categories.forEach((category) => {
+    let tarjeta = { 
+            id: category.id,
+            name: category.name,
+            href: category.path+'/'+ category.name,
+            target: category.target,
+            bgcolor: category.color,
+            icon: category.icon,
+            colorIcon :category.color,
+            title: capitalize(category.name),                           
+            subTitle : category.subTitle, 
+            linkType: home.categoryLink,       
+            showIcon: true } as CardPropsDto;            
+        cards.push(tarjeta);
+   
+});
+
+logger.info("Categotias.astro cards:"+JSON .stringify(cards));
+---
+<Layout>
+    <section id="frameworks" class="py-20 bg-inherit" >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            Available Family Links
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">            
+             {cards.map((card) => (
+                <NewCard cardData = {card} transition={card.name}></NewCard>              
+            ))}
+        </div>
+    </div>
+</section>
+</Layout>
+
+<style>
+    section {
+        perspective: 1000px;
+    }
+    
+    .grid > a {
+        transform: translateZ(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .grid > a:hover {
+        transform: translateZ(20px);
+    }
+</style>

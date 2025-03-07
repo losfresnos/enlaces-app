@@ -1,0 +1,95 @@
+---
+import '../../styles/global.css';
+import Layout from "../../layouts/Layout.astro";
+import type {CardPropsDto}  from '../../model/AppModel';
+import type {Category,Enviroment,Tag, Link}  from '../../model/AppModel';
+import logger from '../../configuration/logger';
+import NewCard from '../../components/card/Card.astro'
+import GroupRadioButtonReact from '../../components/react/GroupRadioButtonReact';
+import { getLinks, getCategoryByName, getEnviromentsByCategory, getTags } from '../../data/tursoConnector'
+import { isEmptyObject , setBoolean } from '../../utils/util';
+import { home } from '../../data/site';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+let isEnv= false;
+let initialOption = "";
+let cards: CardPropsDto[] = [];
+let enviroments: Enviroment[] = [];
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+logger.info("Astro.params slug:"+slug);
+const category: Category = await getCategoryByName(slug);
+if (isEmptyObject(category)){
+	logger.info("category is empty");
+}else{
+	/*Recuperar los entornos asociados a la categoria*/
+	enviroments = await getEnviromentsByCategory(category.id);
+	logger.info("enviroments:"+JSON.stringify(enviroments));
+	if (!isEmptyObject(enviroments)){
+		isEnv = true;
+		enviroments.forEach((env) => {
+		if (env.checked){
+			initialOption = env.enviroment;
+			logger.info("initialOption:"+initialOption);
+		}
+		});
+	} 
+	logger.info("category:"+JSON.stringify(category));
+	const linksTag = await getLinks(category.id);
+	logger.info("links slug:"+JSON.stringify(linksTag));
+	linksTag.forEach((linkTag) => {
+		const link = linkTag.link as Link;
+		const tags = linkTag.tags as Tag[];
+		logger.info("link:"+JSON.stringify(link));
+		logger.info("tags:"+JSON.stringify(tags));
+		let tarjeta = { 
+			id: link.categoryId,
+			name: link.name,
+			href: link.url+'/'+ link.name,
+			target: link.target,          
+			title: capitalize(link.name),
+			subTitle :'Select to open',                            
+			titleSize : 'sg',
+			tags: tags,
+			tmplUrl:link.tmplUrl,
+			isDinamic:link.isDinamic,
+			linkType: home.aplicationLink,                        
+			showIcon: false } as CardPropsDto;          
+		cards.push(tarjeta);
+	});
+	logger.info("cards:"+JSON.stringify(cards));
+}
+---
+<Layout>
+	<section id="frameworks" class="py-20 bg-inherit" transition:name={category.name}>
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+				{category.description}
+			</h2>
+			{isEnv && (				
+				<GroupRadioButtonReact client:load
+									   enviroments={enviroments} 
+									   initialOption={initialOption} />
+			)}			
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">				
+				{cards.map((card) => (
+					<NewCard cardData = {card}></NewCard>					
+				))}		
+
+			</div>
+			<button onclick="history.back()" type="button" class="mt-4 text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+				<svg class="mr-5" fill="currentcolor" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 				viewBox="0 0 26.676 26.676" xml:space="preserve">
+					<g>
+					<path d="M26.105,21.891c-0.229,0-0.439-0.131-0.529-0.346l0,0c-0.066-0.156-1.716-3.857-7.885-4.59
+						c-1.285-0.156-2.824-0.236-4.693-0.25v4.613c0,0.213-0.115,0.406-0.304,0.508c-0.188,0.098-0.413,0.084-0.588-0.033L0.254,13.815
+						C0.094,13.708,0,13.528,0,13.339c0-0.191,0.094-0.365,0.254-0.477l11.857-7.979c0.175-0.121,0.398-0.129,0.588-0.029
+						c0.19,0.102,0.303,0.295,0.303,0.502v4.293c2.578,0.336,13.674,2.33,13.674,11.674c0,0.271-0.191,0.508-0.459,0.562
+						C26.18,21.891,26.141,21.891,26.105,21.891z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></svg>
+				Prev Page
+			</button>			
+		</div>	
+	</section>	
+</Layout>

@@ -3,16 +3,14 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import cloudflare from '@astrojs/cloudflare';
-
-import alpinejs from '@astrojs/alpinejs';
-
 import icon from 'astro-icon';
+
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [react({
     include: ["**/react/**/*.{jsx,tsx}"],
-  }), alpinejs(), icon()],
+  }), icon()],
   output:"server",
   adapter: cloudflare(),
   vite: {
