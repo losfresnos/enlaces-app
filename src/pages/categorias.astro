@@ -15,7 +15,8 @@ const databaseTurso = dbInit(env);
 const resultsTurso = await databaseTurso.select().from(categories).all() ;
 let elements: Category[] = [];
 let cards: CardPropsDto[] = [];
-resultsTurso.forEach((result) => {
+
+resultsTurso.map((result) => {
     let element = {
             id: result.id,
             name: Base64.decode(result.name),          
@@ -27,9 +28,8 @@ resultsTurso.forEach((result) => {
             subTitle : result.subTitle,
             description: Base64.decode(result.subTitle? result.subTitle:''),
         } as Category;
-
         elements.push(element);
-});    
+});
 // Helper function to capitalize first letter
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
