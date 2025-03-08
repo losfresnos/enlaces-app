@@ -2,3 +2,7 @@ name = "enlaces-app"
 compatibility_flags = [ "nodejs_compat" ]
 compatibility_date = "2025-03-08"
 pages_build_output_dir = "./dist"
+
+[vars]
+TURSO_DATABASE_URL=libsql://enlaces-app-losfresnos.turso.io
+TURSO_AUTH_TOKEN=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicm8iLCJleHAiOjE3NDQwNDU1MTksImlhdCI6MTc0MTQ1MzUxOSwiaWQiOiI5NWM3ZGYyYS00MzlkLTQ4ZTItYTRkMC1kMmJkZTE5OWFlYzgifQ.XUW7d_wxd5ceCqphkNybyIC6RDLrAgk_cZJrG1m9-9rmdh3My-NYxjGteR9HEeEajWqSrLSTgR2NDfSS90eBCQ
