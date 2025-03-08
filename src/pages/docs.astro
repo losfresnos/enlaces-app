@@ -21,6 +21,8 @@ const turso = createClient({ url, authToken });
 
 const database = drizzle(turso) as LibSQLDatabase;
 
+const results = await database.select().from(categories).all();
+
 //const turso = dbInit(env);
 //const results = await turso.select().from(categories).all();
 //logger.info("result drizzle:"+JSON.stringify(results));
@@ -37,6 +39,7 @@ const database = drizzle(turso) as LibSQLDatabase;
                 <span class="text-white text-wrap">{JSON.stringify(env)}</span>
                 <span class="text-white text-wrap">{JSON.stringify(turso)}</span>
                 <span class="text-white text-wrap">{JSON.stringify(database)}</span>
+                <span class="text-white text-wrap">{JSON.stringify(results)}</span>
             </li>
         </ul>
     </div>
