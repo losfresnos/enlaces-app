@@ -8,17 +8,34 @@ import { categories } from '../data/schema'
 import { home } from '../data/site';
 import { dbInit } from '../data/drizzle';
 import { mapperCategories } from '../data/repository/category-repository';
+import { Base64 } from 'js-base64';
 
 const { env } = Astro.locals.runtime;
 const databaseTurso = dbInit(env);
-const resultsTurso = await databaseTurso.select().from(categories).all();
-// Helper function to capitalize first letter
-/*
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+const resultsTurso = await databaseTurso.select().from(categories).all() ;
+let elements: Category[] = [];
 let cards: CardPropsDto[] = [];
-const categorias: Category[] = mapperCategories(resultsTurso);
+resultsTurso.forEach((result) => {
+    let element = {
+            id: result.id,
+            name: Base64.decode(result.name),          
+            displayName: Base64.decode(result.name),
+            path: result.path,
+            color: result.color,
+            target: result.target,
+            icon : result.icon,   
+            subTitle : result.subTitle,
+            description: Base64.decode(result.subTitle? result.subTitle:''),
+        } as Category;
+
+        elements.push(element);
+});    
+// Helper function to capitalize first letter
+
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
 logger.info("Categorias.astro categories:"+JSON.stringify(categories));
-categorias.forEach((category) => {
+elements.forEach((category) => {
     let tarjeta = { 
             id: category.id,
             name: category.name,
@@ -36,10 +53,9 @@ categorias.forEach((category) => {
 });
 
 logger.info("Categotias.astro cards:"+JSON .stringify(cards));
-*/
+
 ---
 <Layout>
-    <!--
     <section id="frameworks" class="py-20 bg-inherit" >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
@@ -52,7 +68,6 @@ logger.info("Categotias.astro cards:"+JSON .stringify(cards));
             </div>
         </div>
     </section>
-    -->
     <section id="frameworks" class="py-20 bg-inherit" >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ul class="space-y-4 text-left text-gray-500 dark:text-gray-400">

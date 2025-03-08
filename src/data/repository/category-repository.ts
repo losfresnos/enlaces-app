@@ -23,6 +23,15 @@ export function mapperCategories(resultsTurso):Category[] {
             elements.push(element);
         });
     }
+    id: number;
+    name: string;
+    displayName: string | null;
+    path: string;
+    color: string | null;
+    target: string | null;
+    icon: string | null;
+    subTitle: string | null;
+    description: string | null;
     logger.info("getCardCategories Categories:"+JSON.stringify(elements));
     logger.info("getCardCategories.FIN");
     return elements;
