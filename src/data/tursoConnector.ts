@@ -4,6 +4,8 @@ import type {CardPropsDto, Category, Enviroment, Tag, Link, LinkTag }  from '../
 import { home } from '../data/site';
 import { capitalize, setBoolean } from '../utils/util'
 import { Base64 } from 'js-base64';      
+import { dbInit } from '../data/drizzle'
+import type { Client } from '@libsql/client';
 
 
 export async function getEnviromentsByCategory(categoryId:string):Promise<Enviroment[]>{
@@ -139,7 +141,7 @@ export async function getCategoryByName(name:string):Promise<Category>{
     return category; 
 }
 
-export async function getCategories():Promise<Category[]> {
+export async function getCategories(turso:Client):Promise<Category[]> {
     const { rows } = await turso.execute('SELECT * FROM Category')    
     let categories: Category[] = [];
     logger.info("getCardCategories database:"+JSON.stringify(rows));

@@ -1,14 +1,13 @@
 ---
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
-import { turso } from '../turso'
+import { dbInit } from '../data/drizzle'
 import logger from '../configuration/logger';
 
+const { env } = Astro.locals.runtime;
+const turso = dbInit(env);
 const { rows } = await turso.execute('SELECT * FROM Category')
 logger.info("[...slug].astro link.data.id:"+JSON.stringify(rows));
----
-
-
 ---
 <Layout>
     <section id="frameworks" class="py-20 bg-inherit" >

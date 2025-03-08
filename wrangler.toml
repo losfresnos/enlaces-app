@@ -1,0 +1,4 @@
+name = "enlaces-app"
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2025-03-08"
+pages_build_output_dir = "./dist"

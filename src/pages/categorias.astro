@@ -6,11 +6,14 @@ import type {CardPropsDto, Category}  from '../model/AppModel'
 import logger from '../configuration/logger';
 import { getCategories} from '../data/tursoConnector'
 import { home } from '../data/site';
+import { dbInit } from '../data/drizzle'
 
+const { env } = Astro.locals.runtime;
+const turso = dbInit(env);
 // Helper function to capitalize first letter
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 let cards: CardPropsDto[] = [];
-const categories: Category[] = await getCategories();
+const categories: Category[] = await getCategories(turso);
 logger.info("Categorias.astro categories:"+JSON.stringify(categories));
 categories.forEach((category) => {
     let tarjeta = { 

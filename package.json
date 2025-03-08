@@ -19,6 +19,7 @@
     "astro": "^5.2.5",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
+    "drizzle-orm": "^0.40.0",
     "enlaces-app": "file:",
     "js-base64": "^3.7.7",
     "react": "^19.0.0",
@@ -26,5 +27,8 @@
     "tailwindcss": "^4.0.5",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.5"
   }
 }
