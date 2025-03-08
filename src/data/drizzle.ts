@@ -3,7 +3,7 @@ import { createClient } from "@libsql/client";
 
 
 export function dbInit(env: Env) {
-    const url = env.TURSO_DATABASE_URL?.trim();
+    const url = env.TURSO_URL?.trim();
     if (url === undefined) {
       throw new Error('TURSO_URL is not defined');
     }
