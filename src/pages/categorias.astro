@@ -13,6 +13,7 @@ const { env } = Astro.locals.runtime;
 const databaseTurso = dbInit(env);
 const resultsTurso = await databaseTurso.select().from(categories).all();
 // Helper function to capitalize first letter
+/*
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 let cards: CardPropsDto[] = [];
 const categorias: Category[] = mapperCategories(resultsTurso);
@@ -35,6 +36,7 @@ categorias.forEach((category) => {
 });
 
 logger.info("Categotias.astro cards:"+JSON .stringify(cards));
+*/
 ---
 <Layout>
     <!--
