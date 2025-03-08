@@ -1,6 +1,6 @@
 
 export interface CardPropsDto {
-    id: string;
+    id: number;
     name: string;
     href: string;
     target: string;
@@ -24,7 +24,7 @@ export interface Tag {
 }
 
 export interface Category {
-    id: string;
+    id: number;
     name: string;
     displayName: string;
     path: string;
@@ -36,7 +36,7 @@ export interface Category {
 }
 
 export interface Enviroment {
-    id:string;
+    id:number;
     label : string;
     enviroment : string;
     checked : boolean;
@@ -44,7 +44,7 @@ export interface Enviroment {
 
 
 export interface Link {
-    id:string;
+    id:number;
     name:string;
     url:string;
     target:string;
