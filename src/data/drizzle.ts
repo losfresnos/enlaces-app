@@ -1,5 +1,6 @@
 import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
+import { type Client, type Config } from '@libsql/client';
 
 
 export function dbInit(env: Env) {
@@ -15,5 +16,5 @@ export function dbInit(env: Env) {
   
     const turso = createClient({ url, authToken });
 
-    return drizzle(turso);
+    return drizzle(turso) as LibSQLDatabase;
 }
