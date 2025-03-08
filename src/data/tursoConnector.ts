@@ -141,7 +141,7 @@ export async function getCategoryByName(name:string):Promise<Category>{
     return category; 
 }
 
-export async function getCategories(turso:Client):Promise<Category[]> {
+export async function getCategories(env :Env):Promise<Category[]> {
     const { rows } = await turso.execute('SELECT * FROM Category')    
     let categories: Category[] = [];
     logger.info("getCardCategories database:"+JSON.stringify(rows));

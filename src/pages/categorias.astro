@@ -9,11 +9,14 @@ import { home } from '../data/site';
 import { dbInit } from '../data/drizzle'
 
 const { env } = Astro.locals.runtime;
+console.log("env:"+JSON.stringify(env));
 const turso = dbInit(env);
+console.log("turso:"+JSON.stringify(turso));
 // Helper function to capitalize first letter
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 let cards: CardPropsDto[] = [];
-const categories: Category[] = await getCategories(turso);
+
+const categories: Category[] = await getCategories(env);
 logger.info("Categorias.astro categories:"+JSON.stringify(categories));
 categories.forEach((category) => {
     let tarjeta = { 
