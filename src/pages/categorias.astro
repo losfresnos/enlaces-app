@@ -4,21 +4,21 @@ import Layout from '../layouts/Layout.astro';
 import  NewCard from '../components/card/Card.astro';
 import type {CardPropsDto, Category}  from '../model/AppModel'
 import logger from '../configuration/logger';
-import { getCategories} from '../data/tursoConnector'
+import { categories } from '../data/schema'
 import { home } from '../data/site';
-import { dbInit } from '../data/drizzle'
+import { dbInit } from '../data/drizzle';
+import { mapperCategories } from '../data/repository/category-repository';
 
 const { env } = Astro.locals.runtime;
-console.log("env:"+JSON.stringify(env));
-const turso = dbInit(env);
-console.log("turso:"+JSON.stringify(turso));
+const databaseTurso = dbInit(env);
+const resultsTurso = await databaseTurso.select().from(categories).all();
 // Helper function to capitalize first letter
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 let cards: CardPropsDto[] = [];
 
-const categories: Category[] = await getCategories(env);
+const categorias: Category[] = mapperCategories(resultsTurso);;
 logger.info("Categorias.astro categories:"+JSON.stringify(categories));
-categories.forEach((category) => {
+categorias.forEach((category) => {
     let tarjeta = { 
             id: category.id,
             name: category.name,
