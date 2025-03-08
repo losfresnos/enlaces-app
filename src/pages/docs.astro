@@ -4,18 +4,47 @@ import Layout from '../layouts/Layout.astro';
 import type {Category }  from '../model/AppModel'
 import logger from '../configuration/logger';
 import { getCategories } from '../data/repository/category-repository';
+import { dbInit } from "../data/drizzle";
+import { Base64 } from 'js-base64'; 
+import { categories } from '../data/schema'
 
 const { env } = Astro.locals.runtime;
 logger.info("enviroment:"+JSON.stringify(env));
 
-const categories = await getCategories(env) as Category[];
-logger.info("Categories database:"+JSON.stringify(categories));
+//const categories = await getCategories(env) as Category[];
+//logger.info("Categories database:"+JSON.stringify(categories));
+
+const turso = dbInit(env);
+const results = await turso.select().from(categories).all();
+let elements: Category[] = [];
+
+if (results.length) {
+    results.forEach((result) => {
+        let element = {
+            id: result.id,
+            name: Base64.decode(result.name),          
+            displayName: Base64.decode(result.name),
+            path: result.path,
+            color: result.color,
+            target: result.target,
+            icon : result.icon,   
+            subTitle : result.subTitle,
+            description: Base64.decode(result.subTitle? result.subTitle:''),
+        } as Category;
+
+        elements.push(element);
+    });
+}
+logger.info("getCardCategories Categories:"+JSON.stringify(elements));
+logger.info("getCardCategories.FIN");
+
+
 ---
 <Layout>
     <section id="frameworks" class="py-20 bg-inherit" >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ul class="space-y-4 text-left text-gray-500 dark:text-gray-400">
-                {categories.map((category) => (
+                {elements.map((category) => (
                 <li class="flex items-center space-x-3 rtl:space-x-reverse">
                     <svg class="shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
