@@ -13,9 +13,8 @@ import { Base64 } from 'js-base64';
 const { env } = Astro.locals.runtime;
 const databaseTurso = dbInit(env);
 const resultsTurso = await databaseTurso.select().from(categories).all() ;
-
+/*
 let cards: CardPropsDto[] = [];
-
 let elements = resultsTurso.map((result) => {
     return {
             id: result.id,
@@ -51,7 +50,7 @@ elements.forEach((category) => {
 });
 
 logger.info("Categotias.astro cards:"+JSON .stringify(cards));
-
+*/
 ---
 <Layout>
     <section id="frameworks" class="py-20 bg-inherit" >
@@ -60,8 +59,8 @@ logger.info("Categotias.astro cards:"+JSON .stringify(cards));
                 Available Family Links
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">            
-                {cards.map((card) => (
-                    <Card cardData = {card} transition={card.name}></Card>              
+                {resultsTurso.map((result) => (
+                    <Card cardData = {card} transition={result.name}></Card>              
                 ))}
             </div>
         </div>
