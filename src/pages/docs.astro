@@ -3,11 +3,6 @@ import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import { dbInit } from '../data/drizzle'
 import { categories } from '../data/schema'
-import logger from '../configuration/logger';
-import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client";
-import { getCategoriesDb } from '../data/repository/category-repository'
-import type { Category } from '../model/AppModel';
 
 const { env } = Astro.locals.runtime;
 const databaseTurso = dbInit(env);
@@ -24,6 +19,7 @@ const resultsTurso = await databaseTurso.select().from(categories).all();
                     </svg>
                     <span>{result.id}-{result.name}-{result.path}-{result.icon}</span>
                 </li>
+                <a href={`${result.path}`} ></a>
                 ))}
             </ul>
         </div>

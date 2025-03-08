@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import type {CardPropsDto}  from '../../model/AppModel';
 import type {Category,Enviroment,Tag, Link}  from '../../model/AppModel';
 import logger from '../../configuration/logger';
-import NewCard from '../../components/card/Card.astro'
+import Card from '../../components/card/Card.astro'
 import GroupRadioButtonReact from '../../components/react/GroupRadioButtonReact';
 import { getLinks, getCategoryByName, getEnviromentsByCategory, getTags } from '../../data/tursoConnector'
 import { isEmptyObject , setBoolean } from '../../utils/util';
@@ -75,7 +75,7 @@ if (isEmptyObject(category)){
 			)}			
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">				
 				{cards.map((card) => (
-					<NewCard cardData = {card}></NewCard>					
+					<Card cardData = {card}></Card>					
 				))}		
 
 			</div>
