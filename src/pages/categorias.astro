@@ -9,40 +9,24 @@ import { home } from '../data/site';
 import { dbInit } from '../data/drizzle';
 import { mapperCategories } from '../data/repository/category-repository';
 import { Base64 } from 'js-base64';
+import {capitalize} from '../utils/util';
+
 
 const { env } = Astro.locals.runtime;
 const databaseTurso = dbInit(env);
 const resultsTurso = await databaseTurso.select().from(categories).all() ;
-/*
 let cards: CardPropsDto[] = [];
-let elements = resultsTurso.map((result) => {
-    return {
-            id: result.id,
-            name: Base64.decode(result.name),          
-            displayName: Base64.decode(result.name),
-            path: result.path,
-            color: result.color,
-            target: result.target,
-            icon : result.icon,   
-            subTitle : result.subTitle,
-            description: Base64.decode(result.subTitle? result.subTitle:''),
-        } 
-});
-// Helper function to capitalize first letter
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
-
-logger.info("Categorias.astro categories:"+JSON.stringify(categories));
-elements.forEach((category) => {
+resultsTurso.forEach((result) => {
     let tarjeta = { 
-            id: category.id,
-            name: category.name,
-            href: category.path+'/'+ category.name,
-            target: category.target,
-            bgcolor: category.color,
-            icon: category.icon,
-            colorIcon :category.color,
-            title: capitalize(category.name),                           
-            subTitle : category.subTitle, 
+            id: result.id,
+            name: result.name,
+            href: result.path+'/'+ result.name,
+            target: result.target,
+            bgcolor: result.color,
+            icon: result.icon,
+            colorIcon :result.color,
+            title: capitalize(result.name),                           
+            subTitle : result.subTitle, 
             linkType: home.categoryLink,       
             showIcon: true } as CardPropsDto;            
         cards.push(tarjeta);
@@ -50,17 +34,17 @@ elements.forEach((category) => {
 });
 
 logger.info("Categotias.astro cards:"+JSON .stringify(cards));
-*/
+
 ---
-<Layout>
+<Layout>    
     <section id="frameworks" class="py-20 bg-inherit" >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                 Available Family Links
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">            
-                {resultsTurso.map((result) => (
-                    <Card cardData = {card} transition={result.name}></Card>              
+                {cards.map((card) => (
+                    <Card cardData = {card} transition={card.name}></Card>              
                 ))}
             </div>
         </div>
