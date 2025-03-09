@@ -29,6 +29,8 @@
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.30.5"
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.30.5",
+    "tsx": "^4.19.3"
   }
 }

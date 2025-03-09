@@ -10,6 +10,7 @@ import { dbInit } from '../data/drizzle';
 import { mapperCategories } from '../data/repository/category-repository';
 import { Base64 } from 'js-base64';
 import {capitalize} from '../utils/util';
+import CardCopy from '../components/card/CardCopy.astro';
 
 
 const { env } = Astro.locals.runtime;
@@ -17,15 +18,16 @@ const databaseTurso = dbInit(env);
 const resultsTurso = await databaseTurso.select().from(categories).all() ;
 let cards: CardPropsDto[] = [];
 resultsTurso.forEach((result) => {
+    logger.info("Registro select categories:"+JSON .stringify(result));
     let tarjeta = { 
             id: result.id,
-            name: result.name,
-            href: result.path+'/'+ result.name,
+            name: Base64.decode(result.name),
+            href: 'links/'+ Base64.decode(result.name),
             target: result.target,
             bgcolor: result.color,
             icon: result.icon,
             colorIcon :result.color,
-            title: capitalize(result.name),                           
+            title: capitalize(Base64.decode(result.name)),                           
             subTitle : result.subTitle, 
             linkType: home.categoryLink,       
             showIcon: true } as CardPropsDto;            
@@ -36,7 +38,35 @@ resultsTurso.forEach((result) => {
 logger.info("Categotias.astro cards:"+JSON .stringify(cards));
 
 ---
-<Layout>    
+<Layout>  
+    <section id="frameworks" class="py-20 bg-inherit" >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ul class="space-y-4 text-left text-gray-500 dark:text-gray-400">
+                {cards.map((card) => (
+                <li class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <svg class="shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span>{card.id}-{card.name}-{card.href}-{card.icon}</span>
+                </li>
+                <a href={`${card.href}`}  class="space-y-4 text-left text-gray-500 dark:text-gray-400">Caca</a>
+                ))}
+            </ul>
+        </div>
+    </section>
+    <section id="frameworks" class="py-20 bg-inherit" >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+                Available Family Links
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">            
+                {cards.map((card) => (
+                    <CardCopy cardData = {card} transition={card.name}></CardCopy>              
+                ))}
+            </div>
+        </div>
+    </section>  
+    <!--   
     <section id="frameworks" class="py-20 bg-inherit" >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-cal font-bold text-center mb-12 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
@@ -49,6 +79,7 @@ logger.info("Categotias.astro cards:"+JSON .stringify(cards));
             </div>
         </div>
     </section>  
+    -->
 </Layout>
 
 <style>
